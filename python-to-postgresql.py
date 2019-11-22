@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import psycopg2
+import getpass
 
 username = raw_input("username: ")
 password = getpass.getpass(prompt='database password: ')
