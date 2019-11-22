@@ -11,4 +11,6 @@ cur = conn.cursor()
 while(True):
     psql = raw_input(">")
     cur.execute(psql)
-    print(cur.fetchall())
+    result = cur.fetchall()
+    for line in result:
+        print(line)
