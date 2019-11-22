@@ -2,4 +2,5 @@
 
 import psycopg2
 
-conn = psycopg2.connect("dbname=the_homies user=shoya password=V00730770")
+conn = psycopg2.connect(host="studentdb1.csc.uvic.ca",
+                        database="the_homies", user="shoya", password="V00730770")
