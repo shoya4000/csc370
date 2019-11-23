@@ -32,6 +32,10 @@ while(True):
         print(cur.description)
         result = cur.fetchall()
         print(result)
+        for row in cur:
+            print "schema: {schema}, table: {table}, column: {col}, type: {type}".format(
+                schema=row['table_schema'], table=row['table_name'],
+                col=row['column_name'], type=row['data_type'])
         for line in result:
             print(line)
         conn.commit()
