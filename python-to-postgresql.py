@@ -2,7 +2,6 @@
 
 import psycopg2
 import getpass
-from tabulate import tabulate
 
 username = raw_input("username: ")
 password = getpass.getpass(prompt='database password: ')
@@ -35,7 +34,6 @@ while(True):
         print(result)
         for line in result:
             print(line)
-        print(tabulate(result))
         conn.commit()
     except psycopg2.Error as e:
         print(e.pgerror)
