@@ -18,3 +18,5 @@ while(True):
             print(line)
     except psycopg2.Error as e:
         print(e.pgerror)
+        cur.close()
+        cur = conn.cursor()
