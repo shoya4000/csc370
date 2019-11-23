@@ -10,8 +10,8 @@ conn = psycopg2.connect(host="studentdb1.csc.uvic.ca",
 cur = conn.cursor()
 while(True):
     psql = raw_input(">")
-    # if psql == 'exit':
-    #     exit(0)
+    if str(psql) == 'exit':
+        exit(0)
     try:
         cur.execute(psql)
         result = cur.fetchall()
