@@ -31,7 +31,7 @@ while(True):
         cur.execute(command)
 
         headers = []
-        for header in cur - description:
+        for header in cur.description:
             headers.append(header.name)
         table = [headers]
         print(table)
