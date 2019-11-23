@@ -2,6 +2,7 @@
 
 import psycopg2
 import getpass
+import sys
 import subprocess
 
 username = raw_input("username: ")
