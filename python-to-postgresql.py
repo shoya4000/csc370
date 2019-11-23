@@ -50,37 +50,6 @@ while(True):
                                                for row in table], key=len)) + 1)
         for row in table:
             print(row_format.format(*row))
-        # headers = []
-        # row_format = ""
-        # result = cur.fetchall()
-        # for i, header in enumerate(cur.description):
-        #     headers.append(header.name)
-        #     row_format += "{:<%d}" % (len(max([row[i]
-        #                                        for row in result], key=len)) + 1)
-        # print(row_format.format(*headers))
-
-        # for row in result:
-        #     print(row_format.format(*row))
-
-        # row_format = "{:<21}" * (len(cur.description))
-        # headers = []
-        # for header in cur.description:
-        #     headers.append(header.name)
-        # table = [[headers]]
-        # result = cur.fetchall()
-        # for row in result:
-        #     table.append(row)
-        # row_format = ""
-        # for i, header in cur.description:
-        #     row_format += "{:<%d}" % (len(max([row[i]
-        # for row in table], key=len)) + 1)
-
-        # print(row_format.format(*headers))
-
-        # print(row_format.format(*headers))
-        result = cur.fetchall()
-        for row in result:
-            print(row_format.format(*row))
 
         conn.commit()
     except psycopg2.Error as e:
