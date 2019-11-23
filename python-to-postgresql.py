@@ -16,4 +16,4 @@ while(True):
         for line in result:
             print(line)
     except psycopg2.Error as e:
-        pass
+        print(e.pgerror)
