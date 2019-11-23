@@ -30,6 +30,7 @@ while(True):
         quit()
     try:
         cur.execute(command)
+        print(cur.description)
         result = cur.fetchall()
         print(result)
         for line in result:
