@@ -30,11 +30,11 @@ while(True):
     try:
         cur.execute(command)
 
-        row_format = "{0:>15}" * (len(cur.description) + 1)
+        row_format = "{:<15}" * (len(cur.description) + 1)
         headers = []
         for header in cur.description:
             headers.append(header.name)
-        print(row_format.format("", *headers))
+        print(row_format.format(*headers))
         result = cur.fetchall()
         for row in result:
             print(row_format.format("", *row))
