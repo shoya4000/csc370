@@ -24,9 +24,9 @@ while(True):
       					AND n.nspname !~ '^pg_toast'
   					AND pg_catalog.pg_table_is_visible(c.oid)
 				ORDER BY 1,2;'''
-    command = cur.mogrify(raw)
     elif (str(raw) == '\q'):
         quit()
+    command = cur.mogrify(raw)
     try:
         cur.execute(command)
         for header in cur.description:
