@@ -13,7 +13,7 @@ while(True):
     try:
         cur.execute(psql)
         result = cur.fetchall()
-    for line in result:
-        print(line)
+        for line in result:
+            print(line)
     except psycopg2.Error as e:
         pass
