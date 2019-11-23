@@ -35,8 +35,8 @@ while(True):
         result = cur.fetchall()
         for i, header in enumerate(cur.description):
             headers.append(header.name)
-            row_format += "{:<%d}" % (len(max([row[i]
-                                               for row in result], key=len)) + 1)
+            row_format += "{:<%d}" % (
+                len(str(max([row[i] for row in result], key=len))) + 1)
         print(row_format.format(*headers))
 
         for row in result:
