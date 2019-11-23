@@ -1,8 +1,7 @@
 #!/usr/bin/python
-
+from __future__ import print_function
 import psycopg2
 import getpass
-from __future__ import print_function
 
 username = raw_input("username: ")
 password = getpass.getpass(prompt='database password: ')
