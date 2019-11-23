@@ -24,7 +24,7 @@ while(True):
       					AND n.nspname !~ '^pg_toast'
   					AND pg_catalog.pg_table_is_visible(c.oid)
 				ORDER BY 1,2;'''
-        command = cur.mogrify(raw)
+    command = cur.mogrify(raw)
     elif (str(raw) == '\q'):
         quit()
     try:
@@ -37,14 +37,6 @@ while(True):
             for item in row:
                 print(item + "\t", end='')
             print()
-        # result = cur.fetchall()
-        # print(result)
-        # for row in cur:
-        #     print "schema: {schema}, table: {table}, column: {col}, type: {type}".format(
-        #         schema=row['table_schema'], table=row['table_name'],
-        #         col=row['column_name'], type=row['data_type'])
-        # for line in result:
-        #     print(line)
         conn.commit()
     except psycopg2.Error as e:
         print(e.pgerror)
