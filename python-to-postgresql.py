@@ -2,6 +2,32 @@
 import psycopg2
 import getpass
 
+
+def formatAndPrintResultTable(cur):
+    # instantiate table to fill for printing
+    table = []
+    # gather headers
+    headers = []
+    for header in cur.description:
+        headers.append(header.name)
+    table.append(headers)
+    # gather rows
+    result = cur.fetchall()
+    for row in result:
+        string_row = []
+        for item in row:
+            string_row.append(str(item))
+        table.append(string_row)
+    # define column width (longest item + 1)
+    row_format = ""
+    for i in range(len(headers)):
+        row_format += "{:<%d}" % (len(max([row[i]
+                                           for row in table], key=len)) + 1)
+    # print the result table
+    for row in table:
+        print(row_format.format(*row))
+    # commit the change to the database
+
 username = raw_input("username: ")
 password = getpass.getpass(prompt='database password: ')
 # establish connection
@@ -40,29 +66,3 @@ while(True):
         print(e.pgerror)
         # rollback error caused
         conn.rollback()
-
-
-def formatAndPrintResultTable(cur):
-    # instantiate table to fill for printing
-    table = []
-    # gather headers
-    headers = []
-    for header in cur.description:
-        headers.append(header.name)
-    table.append(headers)
-    # gather rows
-    result = cur.fetchall()
-    for row in result:
-        string_row = []
-        for item in row:
-            string_row.append(str(item))
-        table.append(string_row)
-    # define column width (longest item + 1)
-    row_format = ""
-    for i in range(len(headers)):
-        row_format += "{:<%d}" % (len(max([row[i]
-                                           for row in table], key=len)) + 1)
-    # print the result table
-    for row in table:
-        print(row_format.format(*row))
-    # commit the change to the database
