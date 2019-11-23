@@ -26,6 +26,9 @@ while(True):
   					AND pg_catalog.pg_table_is_visible(c.oid)
 				ORDER BY 1,2;'''
         command = cur.mogrify(raw)
+    elif:
+        if (str(raw) == '\q'):
+            quit()
     try:
         cur.execute(command)
         result = cur.fetchall()
