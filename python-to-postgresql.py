@@ -30,7 +30,7 @@ while(True):
     try:
         cur.execute(command)
 
-        row_format = "{:<30}" * (len(cur.description) + 1)
+        row_format = "{0:<15}" * (len(cur.description) + 1)
         headers = []
         for header in cur.description:
             headers.append(header.name)
