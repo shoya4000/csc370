@@ -12,8 +12,8 @@ while(True):
     psql = raw_input(">")
     try:
         cur.execute(psql)
-    except psycopg2.OperationalError as e:
-        print(e)
+    except psycopg2.Error as e:
+        pass
     result = cur.fetchall()
     for line in result:
         print(line)
