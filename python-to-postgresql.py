@@ -34,7 +34,6 @@ while(True):
         for header in cur.description:
             headers.append(header.name)
         table = [headers]
-        print(table)
         result = cur.fetchall()
         for row in result:
             table.append(row)
@@ -43,7 +42,7 @@ while(True):
             row_format += "{:<%d}" % (len(max([str(row[i])
                                                for row in result], key=len)) + 1)
         for row in table:
-            print(row.format(*row))
+            print(row_format.format(*row))
         # headers = []
         # row_format = ""
         # result = cur.fetchall()
