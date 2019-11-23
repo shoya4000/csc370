@@ -31,22 +31,19 @@ while(True):
         cur.execute(command)
 
         headers = []
-        row_format = ""
-        result = cur.fetchall()
-        for i, header in enumerate(cur.description):
+        for header in cur.description:
             headers.append(header.name)
-            print(max([row[i] for row in result], key=len))
-            row_format += "{:<%d}" % len(max([row[i]
-                                              for row in result], key=len))
-        print(row_format.format(*headers))
-
-        for row in result:
-            print(row_format.format(*row))
-
-        #row_format = "{:<21}" * (len(cur.description))
-
-        print(row_format.format(*headers))
+        table = [[headers]]
         result = cur.fetchall()
+        for row in result:
+            table.append(row)
+        row_format = ""
+        for i in enumerate(headers):
+            row_format += "{:<%d}" % len(max([row[i]
+                                              for row in table], key=len) + 1)
+
+        print(row_format.format(*headers))
+
         for row in result:
             print(row_format.format(*row))
 
