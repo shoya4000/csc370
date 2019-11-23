@@ -34,8 +34,8 @@ while(True):
 
         headers = []
         for header in cur.description:
-            headers.append(header.name)
-		table.append(headers)
+        	headers.append(header.name)
+        table.append(headers)
 
         result = cur.fetchall()
         for row in result:
