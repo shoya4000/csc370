@@ -30,17 +30,23 @@ while(True):
     try:
         cur.execute(command)
 
+        table = []
+
         headers = []
         for header in cur.description:
             headers.append(header.name)
-        table = [headers]
+		table.append(headers)
+
         result = cur.fetchall()
         for row in result:
-            table.append(row)
+        	string_row = []
+        	for item in row:
+        		string_row.append(str(item))
+            table.append(string_row)
+        
         row_format = ""
         for i in range(len(headers)):
-            row_format += "{:<%d}" % (len(max([str(row[i])
-                                               for row in table], key=len)) + 1)
+            row_format += "{:<%d}" % (len(max([row[i] for row in table], key=len)) + 1)
         for row in table:
             print(row_format.format(*row))
         # headers = []
@@ -55,7 +61,7 @@ while(True):
         # for row in result:
         #     print(row_format.format(*row))
 
-        #row_format = "{:<21}" * (len(cur.description))
+        # row_format = "{:<21}" * (len(cur.description))
         # headers = []
         # for header in cur.description:
         #     headers.append(header.name)
