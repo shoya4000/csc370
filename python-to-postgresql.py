@@ -29,7 +29,7 @@ while(True):
         quit()
     try:
         cur.execute(command)
-        print(cur.description[0])
+        print(cur.description)
         # result = cur.fetchall()
         # print(result)
         # for row in cur:
