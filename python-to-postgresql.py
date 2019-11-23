@@ -34,7 +34,7 @@ while(True):
         headers = []
         for header in cur.description:
             headers.append(header.name)
-        print(row_format.format("", *header))
+        print(row_format.format("", *headers))
         result = cur.fetchall()
         for row in result:
             print(row_format.format("", *row))
