@@ -39,8 +39,11 @@ cur = conn.cursor()
 
 while(True):
     raw = raw_input(">")
-    # handle \d for quick view of schema
+    # handle \d for quick view of schema (psycopg2 can't handle meta-commands)
     if (str(raw) == '\d'):
+        # if you run 'psql -U shoya -h studentdb1.csc.uvic.ca -E' with the E on
+        # the end, it echos back the command, this is what is actually running
+        # when \d is entered
         raw = '''SELECT n.nspname as "Schema",
   					c.relname as "Name",
   					CASE c.relkind WHEN 'r' THEN 'table' WHEN 'v' THEN 'view' WHEN 'm' THEN 'materialized view' WHEN 'i' THEN 'index' WHEN 'S' THEN 'sequence' WHEN 's' THEN 'special' WHEN 'f' THEN 'foreign table' WHEN 'p' THEN 'table' END as "Type",
@@ -69,3 +72,5 @@ while(True):
         print(e.pgerror)
         # rollback error caused
         conn.rollback()
+
+# Martin should read this and know that he did good ;)
