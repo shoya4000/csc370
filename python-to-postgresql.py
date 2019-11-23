@@ -30,24 +30,14 @@ while(True):
     try:
         cur.execute(command)
 
-        row_format = "{:<15}" * (len(cur.description))
+        row_format = "{:<18}" * (len(cur.description))
         headers = []
         for header in cur.description:
             headers.append(header.name)
-        print(headers)
         print(row_format.format(*headers))
         result = cur.fetchall()
         for row in result:
-            print(row_format.format("", *row))
-
-        for header in cur.description:
-            print(header.name + "\t", end='')
-        print()
-
-        for row in result:
-            for item in row:
-                print(str(item) + "\t", end='')
-            print()
+            print(row_format.format(*row))
         conn.commit()
     except psycopg2.Error as e:
         print(e.pgerror)
