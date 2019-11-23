@@ -29,7 +29,14 @@ while(True):
         quit()
     try:
         cur.execute(command)
-        print(cur.description)
+        for header in cur.description:
+            print(header.name + "\t", end='')
+        print()
+        result = cur.fetchall()
+        for row in result:
+            for item in row:
+                print(item + "\t", end='')
+            print()
         # result = cur.fetchall()
         # print(result)
         # for row in cur:
