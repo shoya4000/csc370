@@ -40,7 +40,7 @@ while(True):
         row_format = ""
         for i in range(len(headers)):
             row_format += "{:<%d}" % (len(max([str(row[i])
-                                               for row in result], key=len)) + 1)
+                                               for row in table], key=len)) + 1)
         for row in table:
             print(row_format.format(*row))
         # headers = []
