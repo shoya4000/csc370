@@ -35,13 +35,14 @@ while(True):
         for header in cur.description:
             headers.append(header.name)
         print(row_format.format("", *header))
+        result = cur.fetchall()
         for row in result:
             print(row_format.format("", *row))
 
         for header in cur.description:
             print(header.name + "\t", end='')
         print()
-        result = cur.fetchall()
+
         for row in result:
             for item in row:
                 print(str(item) + "\t", end='')
