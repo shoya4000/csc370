@@ -35,7 +35,7 @@ while(True):
         result = cur.fetchall()
         for row in result:
             for item in row:
-                print(item + "\t", end='')
+                print(str(item) + "\t", end='')
             print()
         conn.commit()
     except psycopg2.Error as e:
