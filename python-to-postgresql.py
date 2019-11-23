@@ -38,7 +38,7 @@ while(True):
         for row in result:
             table.append(row)
         row_format = ""
-        for i in enumerate(headers):
+        for i, header in enumerate(headers):
             row_format += "{:<%d}" % len(max([row[i]
                                               for row in table], key=len) + 1)
 
