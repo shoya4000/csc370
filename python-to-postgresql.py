@@ -34,19 +34,20 @@ while(True):
 
         headers = []
         for header in cur.description:
-        	headers.append(header.name)
+            headers.append(header.name)
         table.append(headers)
 
         result = cur.fetchall()
         for row in result:
-        	string_row = []
-        	for item in row:
-        		string_row.append(str(item))
+            string_row = []
+            for item in row:
+                string_row.append(str(item))
             table.append(string_row)
-        
+
         row_format = ""
         for i in range(len(headers)):
-            row_format += "{:<%d}" % (len(max([row[i] for row in table], key=len)) + 1)
+            row_format += "{:<%d}" % (len(max([row[i]
+                                               for row in table], key=len)) + 1)
         for row in table:
             print(row_format.format(*row))
         # headers = []
