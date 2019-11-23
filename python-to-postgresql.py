@@ -29,10 +29,12 @@ def formatAndPrintResultTable(cur):
     # commit the change to the database
 
 username = raw_input("username: ")
+# securely request password
 password = getpass.getpass(prompt='database password: ')
 # establish connection
 conn = psycopg2.connect(host="studentdb1.csc.uvic.ca",
                         database="the_homies", user=username, password=password)
+# begin interaction
 cur = conn.cursor()
 
 while(True):
@@ -57,8 +59,9 @@ while(True):
     # convert command into proper SQL format
     command = cur.mogrify(raw)
     try:
+        # run the SQL query
         cur.execute(command)
-
+        # format output
         formatAndPrintResultTable(cur)
         # commit the change to the database
         conn.commit()
