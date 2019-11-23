@@ -29,6 +29,15 @@ while(True):
     command = cur.mogrify(raw)
     try:
         cur.execute(command)
+
+        row_format = "{:>15}" * (len(cur.description) + 1)
+        headers = []
+        for header in cur.description:
+            headers.append(header.name)
+        print(row_format.format("", *header))
+        for row in result:
+            print(row_format.format("", *row))
+
         for header in cur.description:
             print(header.name + "\t", end='')
         print()
