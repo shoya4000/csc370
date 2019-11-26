@@ -14,6 +14,7 @@ def formatAndPrintResultTable(cur):
         table.append(headers)
     # gather rows
     result = cur.fetchall()
+    print(result)
     for row in result:
         string_row = []
         for item in row:
