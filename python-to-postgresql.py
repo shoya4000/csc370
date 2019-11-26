@@ -12,9 +12,10 @@ def formatAndPrintResultTable(cur):
         for header in cur.description:
             headers.append(header.name)
         table.append(headers)
+    elif cur.statusmessage:
+        print(cur.statusmessage)
     # gather rows
     result = cur.fetchall()
-    print(result)
     for row in result:
         string_row = []
         for item in row:
@@ -28,7 +29,6 @@ def formatAndPrintResultTable(cur):
     # print the result table
     for row in table:
         print(row_format.format(*row))
-    # commit the change to the database
 
 username = raw_input("username: ")
 # securely request password
