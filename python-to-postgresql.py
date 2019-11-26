@@ -1,7 +1,6 @@
 #!/usr/bin/python
 import psycopg2
 import getpass
-import os
 
 
 def formatAndPrintResultTable(cur):
@@ -66,7 +65,6 @@ while(True):
     elif (str(raw) == '\q'):
         quit()
     elif (str(raw) == '\create'):
-        os.chdir(path)
         with open('psql_create_db.sql', 'r') as file:
             raw = file.read()
     # convert command into proper SQL format
