@@ -46,8 +46,8 @@ while(True):
     raw = raw_input(">")
     # handle \d for quick view of schema (psycopg2 can't handle meta-commands)
     if (str(raw) == '\d'):
-        # if you run 'psql -U shoya -h studentdb1.csc.uvic.ca -E' with the E on
-        # the end, it echos back the command, this is what is actually running
+        # if you run 'psql -U shoya -h studentdb1.csc.uvic.ca -E' with the -E on
+        # the end, it echos back the command. This is what is actually running
         # when \d is entered
         raw = '''SELECT n.nspname as "Schema",
   					c.relname as "Name",
