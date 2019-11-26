@@ -14,21 +14,22 @@ def formatAndPrintResultTable(cur):
         table.append(headers)
     elif cur.statusmessage:
         print(cur.statusmessage)
-    # gather rows
-    result = cur.fetchall()
-    for row in result:
-        string_row = []
-        for item in row:
-            string_row.append(str(item))
-        table.append(string_row)
-    # define column width (longest item + 1)
-    row_format = ""
-    for i in range(len(headers)):
-        row_format += "{:<%d}" % (len(max([row[i]
-                                           for row in table], key=len)) + 1)
-    # print the result table
-    for row in table:
-        print(row_format.format(*row))
+    else:
+            # gather rows
+        result = cur.fetchall()
+        for row in result:
+            string_row = []
+            for item in row:
+                string_row.append(str(item))
+            table.append(string_row)
+        # define column width (longest item + 1)
+        row_format = ""
+        for i in range(len(headers)):
+            row_format += "{:<%d}" % (len(max([row[i]
+                                               for row in table], key=len)) + 1)
+        # print the result table
+        for row in table:
+            print(row_format.format(*row))
 
 username = raw_input("username: ")
 # securely request password
@@ -36,6 +37,8 @@ password = getpass.getpass(prompt='database password: ')
 # establish connection
 conn = psycopg2.connect(host="studentdb1.csc.uvic.ca",
                         database="the_homies", user=username, password=password)
+# set autocommit
+conn.autocommit = True
 # begin interaction
 cur = conn.cursor()
 
@@ -68,8 +71,6 @@ while(True):
         cur.execute(command)
         # format output
         formatAndPrintResultTable(cur)
-        # commit the change to the database
-        conn.commit()
     except psycopg2.Error as e:
         print(e.pgerror)
         # rollback error caused
