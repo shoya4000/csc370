@@ -7,10 +7,11 @@ def formatAndPrintResultTable(cur):
     # instantiate table to fill for printing
     table = []
     # gather headers
-    headers = []
-    for header in cur.description:
-        headers.append(header.name)
-    table.append(headers)
+    if cur.description:
+        headers = []
+        for header in cur.description:
+            headers.append(header.name)
+        table.append(headers)
     # gather rows
     result = cur.fetchall()
     for row in result:
@@ -72,5 +73,3 @@ while(True):
         print(e.pgerror)
         # rollback error caused
         conn.rollback()
-
-# Martin should read this and know that he did good ;)
