@@ -102,7 +102,7 @@ while(True):
         demo(cur, conn)
         continue
     # handle \d for quick view of schema (psycopg2 can't handle meta-commands)
-    if (str(raw) == '\d'):
+    elif (str(raw) == '\d'):
         # if you run 'psql -U shoya -h studentdb1.csc.uvic.ca -E' with the -E on
         # the end, it echos back the command. This is what is actually running
         # when \d is entered
@@ -113,4 +113,6 @@ while(True):
     elif (str(raw) == '\create'):
         with open('psql_create_db.sql', 'r') as file:
             raw = file.read()
+    elif (str(raw) == ''):
+        continue
     runCommand(cur, raw, conn)
