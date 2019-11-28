@@ -3,7 +3,22 @@ import psycopg2
 import getpass
 
 
+describe = '''SELECT n.nspname as "Schema",
+  					c.relname as "Name",
+  					CASE c.relkind WHEN 'r' THEN 'table' WHEN 'v' THEN 'view' WHEN 'm' THEN 'materialized view' WHEN 'i' THEN 'index' WHEN 'S' THEN 'sequence' WHEN 's' THEN 'special' WHEN 'f' THEN 'foreign table' WHEN 'p' THEN 'table' END as "Type",
+  					pg_catalog.pg_get_userbyid(c.relowner) as "Owner"
+				FROM pg_catalog.pg_class c
+     				LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
+				WHERE c.relkind IN ('r','p','v','m','S','f','')
+      					AND n.nspname <> 'pg_catalog'
+      					AND n.nspname <> 'information_schema'
+      					AND n.nspname !~ '^pg_toast'
+  					AND pg_catalog.pg_table_is_visible(c.oid)
+				ORDER BY 1,2;'''
+
+
 def formatAndPrintResultTable(cur):
+    # format and print the response from the SQL executed
     # instantiate table to fill for printing
     table = []
     # gather headers
@@ -31,6 +46,26 @@ def formatAndPrintResultTable(cur):
         print(cur.statusmessage)
 
 
+def runCommand(cur, raw, conn):
+        # format and execute the SQL
+    # convert command into proper SQL format
+    command = cur.mogrify(raw)
+    try:
+        # run the SQL query
+        cur.execute(command)
+        # format output
+        formatAndPrintResultTable(cur)
+    except psycopg2.Error as e:
+        print(e.pgerror)
+        # rollback error caused
+        conn.rollback()
+
+
+def demo(cur, conn):
+    print("Running demo:")
+    raw = raw_input(">\d")
+    runCommand(cur, )
+
 username = raw_input("username: ")
 # securely request password
 password = getpass.getpass(prompt='database password: ')
@@ -44,37 +79,18 @@ cur = conn.cursor()
 
 while(True):
     raw = raw_input(">")
+    if (str(raw) == '\demo'):
+        demo(cur, conn)
     # handle \d for quick view of schema (psycopg2 can't handle meta-commands)
     if (str(raw) == '\d'):
         # if you run 'psql -U shoya -h studentdb1.csc.uvic.ca -E' with the -E on
         # the end, it echos back the command. This is what is actually running
         # when \d is entered
-        raw = '''SELECT n.nspname as "Schema",
-  					c.relname as "Name",
-  					CASE c.relkind WHEN 'r' THEN 'table' WHEN 'v' THEN 'view' WHEN 'm' THEN 'materialized view' WHEN 'i' THEN 'index' WHEN 'S' THEN 'sequence' WHEN 's' THEN 'special' WHEN 'f' THEN 'foreign table' WHEN 'p' THEN 'table' END as "Type",
-  					pg_catalog.pg_get_userbyid(c.relowner) as "Owner"
-				FROM pg_catalog.pg_class c
-     				LEFT JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace
-				WHERE c.relkind IN ('r','p','v','m','S','f','')
-      					AND n.nspname <> 'pg_catalog'
-      					AND n.nspname <> 'information_schema'
-      					AND n.nspname !~ '^pg_toast'
-  					AND pg_catalog.pg_table_is_visible(c.oid)
-				ORDER BY 1,2;'''
+        raw = describe
     # handle \q to quit
     elif (str(raw) == '\q'):
         quit()
     elif (str(raw) == '\create'):
         with open('psql_create_db.sql', 'r') as file:
             raw = file.read()
-    # convert command into proper SQL format
-    command = cur.mogrify(raw)
-    try:
-        # run the SQL query
-        cur.execute(command)
-        # format output
-        formatAndPrintResultTable(cur)
-    except psycopg2.Error as e:
-        print(e.pgerror)
-        # rollback error caused
-        conn.rollback()
+    runCommand(cur, raw, conn)
