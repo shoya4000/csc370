@@ -64,25 +64,40 @@ def runCommand(cur, raw, conn):
 def demo(cur, conn):
     print("Running demo:")
     # run create
-    raw_input(">\create")
+    print("\nCommand to run psql script to delete and recreate database:")
+    raw_input("\n>\create")
     with open('psql_create_db.sql', 'r') as file:
         raw = file.read()
     runCommand(cur, raw, conn)
     # run describe
-    raw_input(">\d")
+    print("\nCommand to psql's meta-command \d (describe):")
+    raw_input("\n>\d")
     raw = describe
     runCommand(cur, raw, conn)
     # run select all
+    print("\nSelect and display all users and their information:")
     raw = "SELECT * FROM User_acc"
-    raw_input(">" + raw)
+    raw_input("\n>" + raw)
     runCommand(cur, raw, conn)
     # run insert
+    print("\nInsert a Test User:")
     raw = "INSERT INTO user_acc (Email, PermissionLevel, Username, Password) VALUES('test@uvic.ca', TRUE, 'Test User', 'TestPassword');"
-    raw_input(">" + raw)
+    raw_input("\n>" + raw)
     runCommand(cur, raw, conn)
     # run select all
+    print("\nShow updated table:")
     raw = "SELECT * FROM User_acc"
-    raw_input(">" + raw)
+    raw_input("\n>" + raw)
+    runCommand(cur, raw, conn)
+    # run delete Martin
+    print("\nDelete Martin from the users:")
+    raw = "DELETE * FROM User_acc WHERE user='Martin"
+    raw_input("\n>" + raw)
+    runCommand(cur, raw, conn)
+    # run select all
+    print("\nShow updated table:")
+    raw = "SELECT * FROM User_acc"
+    raw_input("\n>" + raw)
     runCommand(cur, raw, conn)
 
 username = raw_input("username: ")

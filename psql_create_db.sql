@@ -60,7 +60,7 @@ CREATE TABLE Comment (
 
 INSERT INTO user_acc (Email, PermissionLevel, Username, Password) VALUES('mhauss@uvic.ca', TRUE, 'El Presidente', 'hotSTUFF1');
 INSERT INTO user_acc (Email, PermissionLevel, Username, Password) VALUES('cdclarke@uvic.ca', TRUE, 'Chris', 'trevorsucks123');
-INSERT INTO user_acc (Email, PermissionLevel, Username, Password) VALUES('martinroesli@uvic.ca', TRUE, 'Mroesli', 'abcdefg1234567');
+INSERT INTO user_acc (Email, PermissionLevel, Username, Password) VALUES('martinroesli@uvic.ca', TRUE, 'Martin', 'abcdefg1234567');
 INSERT INTO user_acc (Email, PermissionLevel, Username, Password) VALUES('thisistrevor@uvic.ca', TRUE, 'Trev', 'hiimtrevor123');
 INSERT INTO user_acc (Email, PermissionLevel, Username, Password) VALUES('shoya@uvic.ca', TRUE, 'ShoYa', 'ShoYaPassword');
 INSERT INTO user_acc (Email, PermissionLevel, Username, Password) VALUES('harperfriedman@uvic.ca', TRUE, 'NotPM', 'definitelyNot1234');
