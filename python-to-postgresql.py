@@ -100,6 +100,7 @@ while(True):
     raw = raw_input(">")
     if (str(raw) == '\demo'):
         demo(cur, conn)
+        continue
     # handle \d for quick view of schema (psycopg2 can't handle meta-commands)
     if (str(raw) == '\d'):
         # if you run 'psql -U shoya -h studentdb1.csc.uvic.ca -E' with the -E on
