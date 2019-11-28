@@ -76,7 +76,7 @@ def demo(cur, conn):
     runCommand(cur, raw, conn)
     # run select all
     print("\nSelect and display all users and their information:")
-    raw = "SELECT * FROM User_acc"
+    raw = "SELECT * FROM user_acc;"
     raw_input("\n>" + raw)
     runCommand(cur, raw, conn)
     # run insert
@@ -86,17 +86,21 @@ def demo(cur, conn):
     runCommand(cur, raw, conn)
     # run select all
     print("\nShow updated table:")
-    raw = "SELECT * FROM User_acc"
+    raw = "SELECT * FROM user_acc;"
     raw_input("\n>" + raw)
     runCommand(cur, raw, conn)
     # run delete Martin
     print("\nDelete Martin from the users:")
-    raw = "DELETE * FROM User_acc WHERE user='Martin"
+    raw = '''DELETE FROM Post WHERE ProfileID=(SELECT ProfileID FROM Profile WHERE UserID=(SELECT UserID FROM user_acc WHERE Username='Martin'));
+			DELETE FROM Follows WHERE FollowerProfileID=(SELECT ProfileID FROM Profile WHERE UserID=(SELECT UserID FROM user_acc WHERE Username='Martin')) OR FolloweeProfileID=(SELECT ProfileID FROM Profile WHERE UserID=(SELECT UserID FROM user_acc WHERE Username='Martin'));
+			DELETE FROM Profile WHERE UserID=(SELECT UserID FROM user_acc WHERE Username='Martin');
+			DELETE FROM user_acc WHERE Username='Martin';'''
+    raw = cur.mogrify(raw)
     raw_input("\n>" + raw)
     runCommand(cur, raw, conn)
     # run select all
     print("\nShow updated table:")
-    raw = "SELECT * FROM User_acc"
+    raw = "SELECT * FROM user_acc;"
     raw_input("\n>" + raw)
     runCommand(cur, raw, conn)
 
