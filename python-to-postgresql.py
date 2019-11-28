@@ -64,25 +64,25 @@ def runCommand(cur, raw, conn):
 def demo(cur, conn):
     print("Running demo:")
     # run create
-    raw = raw_input(">\create")
+    raw_input(">\create")
     with open('psql_create_db.sql', 'r') as file:
         raw = file.read()
     runCommand(cur, raw, conn)
     # run describe
-    raw = raw_input(">\d")
+    raw_input(">\d")
     raw = describe
     runCommand(cur, raw, conn)
     # run select all
     raw = "SELECT * FROM User_acc"
-    raw = raw_input(">" + raw)
+    raw_input(">" + raw)
     runCommand(cur, raw, conn)
     # run insert
     raw = "INSERT INTO user_acc (Email, PermissionLevel, Username, Password) VALUES('test@uvic.ca', TRUE, 'Test User', 'TestPassword');"
-    raw = raw_input(">" + raw)
+    raw_input(">" + raw)
     runCommand(cur, raw, conn)
     # run select all
     raw = "SELECT * FROM User_acc"
-    raw = raw_input(">" + raw)
+    raw_input(">" + raw)
     runCommand(cur, raw, conn)
 
 username = raw_input("username: ")
