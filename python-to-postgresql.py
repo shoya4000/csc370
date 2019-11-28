@@ -65,32 +65,65 @@ def demo(cur, conn):
     print("Running demo:")
     # run create
     print("\nCommand to run psql script to delete and recreate database:")
-    raw_input("\n>\create")
+    raw_input(">\create")
     with open('psql_create_db.sql', 'r') as file:
         raw = file.read()
     runCommand(cur, raw, conn)
     # run describe
-    print("\nCommand to psql's meta-command \d (describe):")
-    raw_input("\n>\d")
+    print("\nCommand to run psql's meta-command \d (describe):")
+    raw_input(">\d")
     raw = describe
     runCommand(cur, raw, conn)
-    # run select all
+    # run select all users
     print("\nSelect and display all users and their information:")
     raw = "SELECT * FROM user_acc;"
-    raw_input("\n>" + raw)
+    raw_input(">" + raw)
+    runCommand(cur, raw, conn)
+    # run select all profiles
+    print("\nSelect and display all profiles:")
+    raw = "SELECT * FROM Profile;"
+    raw_input(">" + raw)
+    runCommand(cur, raw, conn)
+    # run select all Follows
+    print("\nSelect and display all profiles:")
+    raw = "SELECT * FROM Follows;"
+    raw_input(">" + raw)
+    runCommand(cur, raw, conn)
+    # run select all Posts
+    print("\nSelect and display all posts:")
+    raw = "SELECT * FROM Post;"
+    raw_input(">" + raw)
+    runCommand(cur, raw, conn)
+    # run select all Posts
+    print("\nSelect and display all content:")
+    raw = "SELECT * FROM Content;"
+    raw_input(">" + raw)
+    runCommand(cur, raw, conn)
+    # run select all PostTags
+    print("\nSelect and display all post tags:")
+    raw = "SELECT * FROM PostTags;"
+    raw_input(">" + raw)
+    runCommand(cur, raw, conn)
+    print("\nSelect and display all Profile tags:")
+    raw = "SELECT * FROM ProfileTags;"
+    raw_input(">" + raw)
+    runCommand(cur, raw, conn)
+    print("\nSelect and display all comments:")
+    raw = "SELECT * FROM Comment;"
+    raw_input(">" + raw)
     runCommand(cur, raw, conn)
     # run insert
     print("\nInsert a Test User:")
     raw = "INSERT INTO user_acc (Email, PermissionLevel, Username, Password) VALUES('test@uvic.ca', TRUE, 'Test User', 'TestPassword');"
-    raw_input("\n>" + raw)
+    raw_input(">" + raw)
     runCommand(cur, raw, conn)
     # run select all
-    print("\nShow updated table:")
+    print("Show updated table:")
     raw = "SELECT * FROM user_acc;"
-    raw_input("\n>" + raw)
+    raw_input(">" + raw)
     runCommand(cur, raw, conn)
     # run delete Martin
-    print("\nDelete Martin from the users:")
+    print("\nDelete Martin from the database:")
     raw = '''DELETE FROM Post WHERE ProfileID=(SELECT ProfileID FROM Profile WHERE UserID=(SELECT UserID FROM user_acc WHERE Username='Martin'));
 			DELETE FROM Follows WHERE FollowerProfileID=(SELECT ProfileID FROM Profile WHERE UserID=(SELECT UserID FROM user_acc WHERE Username='Martin')) OR FolloweeProfileID=(SELECT ProfileID FROM Profile WHERE UserID=(SELECT UserID FROM user_acc WHERE Username='Martin'));
 			DELETE FROM Profile WHERE UserID=(SELECT UserID FROM user_acc WHERE Username='Martin');
